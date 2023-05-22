@@ -4,6 +4,7 @@ import shutil
 import time
 
 url_base = "http://unstablegameswiki.com"
+sleep_time = 3
 
 file_name = "cards_list29.txt"
 with open(file_name, mode = "r") as file:
@@ -24,7 +25,7 @@ for index, card in enumerate(cards_list):
             data = req.text
             break
         else:
-            time.sleep(3)
+            time.sleep(sleep_time)
 ##    data = requests.get(url).text
     soup = BeautifulSoup(data, "html.parser")
     url_card = soup.find("a", {"title" : "Enlarge"}).get("href")
@@ -43,7 +44,7 @@ for index, card in enumerate(cards_list):
             data = req.text
             break
         else:
-            time.sleep(3)
+            time.sleep(sleep_time)
 ##    data = requests.get(url).text
     soup = BeautifulSoup(data, "html.parser")
     url_image = soup.find("a", text = "Original file").get("href")
@@ -55,7 +56,7 @@ for index, card in enumerate(cards_list):
             data = req
             break
         else:
-            time.sleep(3)
+            time.sleep(sleep_time)
 ##    data = requests.get(url, stream = True)
     data.raw.decode_content = True
     with open(str(index) + "_" + card.replace(" ","_") + "." + url_image.split(".")[-1], "wb") as image:
